@@ -31,27 +31,21 @@ function csharp() {
   ];
 }
 
-function controllerSlides() {
+function testSlides() {
   return [
-    '01-controller/00-TITLE.md',
-    '01-controller/01-Intro-et-rappel.md',
-    '01-controller/02-anatomie-controller.md',
-    '01-controller/03-routes.md',
-    '01-controller/04-filtres.md',
-    '01-controller/05-transition.md',
-    '01-controller/06-questions.md',
-    '01-controller/07-Q&A.md',
+    '01-tests/00-TITLE.md',
+    '01-tests/01-Intro-et-rappel.md',
   ];
 }
 
-function viewslides() {
+function apiSlides() {
   return [
-    '02-view/00-TITLE.md',
-    '02-view/01-intro.md',
-    '02-view/02-layouts-et-style.md',
-    '02-view/03-communication-controller.md',
-    '02-view/04-Helper.md',
-    '02-view/06-Q&A.md',
+    '02-api/00-TITLE.md',
+    '02-api/01-intro.md',
+    '02-api/02-layouts-et-style.md',
+    '02-api/03-communication-controller.md',
+    '02-api/04-Helper.md',
+    '02-api/06-Q&A.md',
   ];
 }
 function modelSlides() {
@@ -68,10 +62,10 @@ function formation() {
   return [
     //
     ...schoolSlides(), //
+    ...apiSlides(),
     ...history(), //
     ...csharp(), //
-    ...controllerSlides(), //
-    ...viewslides(), //
+    ...testSlides(), // //
     ...modelSlides(), //
   ].map((slidePath) => {
     return { path: slidePath };
