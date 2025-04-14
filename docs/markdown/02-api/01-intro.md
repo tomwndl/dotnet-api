@@ -1,3 +1,8 @@
+<!-- .slide: class="transition-bg-sfeir-1" -->
+
+# Introduction
+
+##==##
 # Objectifs
 
 - Introduction aux API Web
@@ -28,19 +33,20 @@ Notes:
 ##==##
 
 # Pourquoi utiliser des APIs
-- Réutilisabilité : Les fonctionnalités exposées via une API peuvent être utilisées par plusieurs applications.
-- Interopérabilité : Permet aux systèmes de différentes technologies de communiquer.
-- Séparation des responsabilités : Les API permettent de séparer le backend (logique métier) du frontend (interface utilisateur).
-- Architecteur micro-services
+- **Réutilisabilité** : Les fonctionnalités exposées via une API peuvent être utilisées par plusieurs applications.
+- **Interopérabilité** : Permet aux systèmes de différentes technologies de communiquer.
+- **Séparation des responsabilités** : Les API permettent de séparer le backend (logique métier) du frontend (interface utilisateur).
+- **Architecteur micro-services**
 <!-- .element: class="list-fragment" -->
 
 
 ##==##
 
-# Concepts clés des API Web
+# Concepts clés
 
-- Client : Une application ou un utilisateur envoie une requête à l'API.
-- Serveur : L'API traite la requête et retourne une réponse (souvent au format JSON ou XML).
-- Protocole HTTP/HTTPS : Les API Web utilisent le protocole HTTP ou HTTPS pour la communication.
-- Format de données : JSON : (format léger et facile à lire, largement utilisé)
-- Endpoint : URL spécifique qui représente une ressource ou une action dans l'API (api/Users/123 => retourne l'utilisateur avec l'id 123)
+- **Client** : Une application ou un utilisateur envoie une requête à l'API.
+- **Serveur** : L'API traite la requête et retourne une réponse 
+- **Protocole HTTP/HTTPS** 
+- **Format de données** : JSON
+- **Endpoint** : URL représentant une ressource/action dans l'API (api/Users/123 => retourne l'utilisateur avec l'id 123)
+<!-- .element: class="list-fragment" -->

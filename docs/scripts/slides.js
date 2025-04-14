@@ -42,8 +42,8 @@ function apiSlides() {
   return [
     '02-api/00-TITLE.md',
     '02-api/01-intro.md',
-    '02-api/02-layouts-et-style.md',
-    '02-api/03-communication-controller.md',
+    '02-api/02-REST.md',
+    '02-api/03-bonnes-pratiques.md',
     '02-api/04-Helper.md',
     '02-api/06-Q&A.md',
   ];
