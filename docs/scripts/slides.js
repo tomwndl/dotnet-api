@@ -44,7 +44,7 @@ function apiSlides() {
     '02-api/01-intro.md',
     '02-api/02-REST.md',
     '02-api/03-bonnes-pratiques.md',
-    '02-api/04-Helper.md',
+    '02-api/04-api-net.md',
     '02-api/06-Q&A.md',
   ];
 }

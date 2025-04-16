@@ -1,8 +1,4 @@
-<!-- .slide: class="transition-bg-sfeir-1" -->
 
-# Introduction
-
-##==##
 # Objectifs
 
 - Introduction aux API Web

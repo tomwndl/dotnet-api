@@ -1,180 +1,326 @@
-# HTML Helpers & Tag Helpers
+<!-- .slide: class="transition-bg-sfeir-1" -->
 
-Les HTML Helpers et Tag Helpers sont des outils en ASP.NET MVC permettant de générer du code HTML de manière dynamique
-
-HTML Helpers :
-- Utilise des méthodes C# dans Razor
-
-Tags Helpers :
-- Offrent une syntaxe plus intuitive via des attributs HTML.
-- Préférés pour la lisibilité et la séparation propre entre HTML et C#.
-
-Pour les nouveaux projets ASP.NET Core, il est recommandé d’utiliser Tag Helpers autant que possible pour un code plus propre et maintenable.
+# Api .Net (Crétion d'une api todolist)
 
 ##==##
 
-# HTML Helpers
+# Initier le projet
 
-- Ce sont des méthodes C# disponibles dans Razor pour générer du code HTML.
-- Fournis via l'objet Html, ils facilitent la génération d'éléments HTML côté serveur.
-
-``` cshtml
-@Html.TextBox("username", "Valeur par défaut", new { @class = "form-control" })
-```
-equivalent de : 
-``` cshtml
-<input type="text" name="username" value="Valeur par défaut" class="form-control" />
-```
-Avantages :
-- Bonne intégration avec C# (fortement typé, IntelliSense).
-- Utilisation classique en ASP.NET MVC (avant ASP.NET Core).
+- Ouvrir Visual Studio et créer un nouveau projet
+- Selectionner le template API web ASP. NET Core
+- Nommer le projet
+- Décocher la case configurer pour HTTPS
+- Cliquer sur créer
 
 ##==##
 
-# Tag Helpers
+# Observation du template créé
 
-- Introduits avec ASP.NET Core MVC, ils permettent d'ajouter une logique côté serveur à du code HTML standard grâce aux attributs HTML.
-- Utilisent une syntaxe plus naturelle et proche du HTML.
-
-``` cshtml
-<input asp-for="UserName" class="form-control" value="Valeur par défaut" />
-```
-equivalent de : 
-``` cshtml
-<input type="text" name="username" value="Valeur par défaut" class="form-control" />
-```
-
- Avantages :
-- Syntaxe plus propre et lisible pour les développeurs front-end.
-- Meilleure séparation des préoccupations (HTML + Razor moins mélangés).
-- Prise en charge de l'IntelliSense pour les attributs spécifiques.
+- Api de prévision météorologiques
+- Un model 
+- Un controller
+- Une classe Program
+- Un fichier .http pour tester les requête dans Visual Studio
 
 ##==##
 
-# Tag Helpers :  fonctionnement
+# Le controller d'api
 
-``` cshtml
-@model Product
-
-<form asp-action="Create" asp-controller="Product" method="post">
-
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input asp-for="Name" class="form-control" placeholder="Entrez le nom du produit" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Ajouter le produit</button>
-</form>
-```
+- classe qui traite les requêtes HTTP
+- point d’entrée entre le client (ex : une app web ou mobile) et le back-end
+- Hérite généralement de la classe ControllerBase
 
 ##==##
 
-# Tag Helpers :  fonctionnement avec des types plus complexes
+# Les attributs importants
+
+| Attribut              | Description                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| `[ApiController]`     | Active les fonctionnalités automatiques (binding, validation, 400 implicite) |
+| `[Route(...)]`        | Définit la route du contrôleur ou de l’action                               |
+| `[HttpGet]`           | Spécifie que l’action répond aux requêtes HTTP GET                          |
+| `[HttpPost]`          | Spécifie que l’action répond aux requêtes HTTP POST                         |
+| `[HttpPut]`           | Spécifie que l’action répond aux requêtes HTTP PUT                          |
+| `[HttpDelete]`        | Spécifie que l’action répond aux requêtes HTTP DELETE                       |
+| `[FromBody]`          | Indique que la donnée provient du corps de la requête HTTP                  |
+| `[FromQuery]`         | Indique que la donnée provient de la query string                           |
+| `[FromRoute]`         | Indique que la donnée provient des paramètres de route                      |
+| `[FromForm]`          | Indique que la donnée provient d’un formulaire envoyé en POST               |
+
+
+##==##
+
+# Validation automatique des modèles
 
 ``` cs
-public class Category
-{
-    public string Name { get; set; }
-}
-
-public class Product
-{
-    public string Name { get; set; }
-    public Category Category { get; set; } = new Category();
-}
-```
-
-##==##
-
-# Tag Helpers :  fonctionnement avec des types plus complexes
-
-``` cshtml
-@model Product
-
-<form asp-action="Create" asp-controller="Product" method="post">
-    <!-- Champ pour le nom du produit -->
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input asp-for="Name" class="form-control" placeholder="Nom du produit" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-
-    <!-- Champ pour la catégorie (objet imbriqué) -->
-    <div class="mb-3">
-        <label asp-for="Category.Name" class="form-label"></label>
-        <input asp-for="Category.Name" class="form-control" placeholder="Nom de la catégorie" />
-        <span asp-validation-for="Category.Name" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Ajouter le produit</button>
-</form>
-```
-
-##==##
-
-# Tag Helpers courants : inputs
-
-Les Tag Helpers sont basés sur des attributs commençant par asp- et sont utilisés pour rendre des éléments HTML dynamiques.
-
-Champ texte (TextBox): 
-``` cshtml
-<input asp-for="Name" class="form-control" placeholder="Entrez votre nom" /> //
-```
-
-Mot de passe : 
-``` cshtml
-<input asp-for="Password" type="password" class="form-control" />
-```
-
-Case à cocher : 
-``` cshtml
-<input asp-for="RememberMe" type="checkbox" />
-```
-
-Boutons radio : 
-``` cshtml
-<input asp-for="Gender" type="radio" value="Male" /> Homme
-<input asp-for="Gender" type="radio" value="Female" /> Femme
-```
-##==##
-
-
-# Validation automatique avec Tag Helpers
-
-ASP.NET Core ajoute automatiquement les attributs de validation HTML (required, minlength, etc.) en fonction des annotations de données dans le modèle.
-Exemple dans le modèle C# :
-
-``` cs
-public class Product
+public class UserDto
 {
     [Required]
     public string Name { get; set; }
 }
-```
 
-``` cs
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input asp-for="Name" class="form-control" placeholder="Entrez le nom du produit" />
-    </div>
-```
+[ApiController]
+public class Controller : ControllerBase
+{
+  [HttpPost]
+  public IActionResult CreateUser([FromBody] UserDto user)
+  {
+      if (!ModelState.IsValid) return BadRequest(ModelState);
+      // inutile si [ApiController] est présent
+  }   
+}
 
-https://learn.microsoft.com/fr-fr/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-9.0#the-form-tag-helper
+```
 
 ##==##
 
-# Formulaire simple (30 minutes)
+# Les types de retours
 
-- Améliorer l'objet produit pour qu'il ai un nom (string), un prix (décimal), une description (string) et une couleur.
-- Créer une vue productList dans View/Product 
-- Créer le formulaire d'ajout de produit
-- Ajouter un onglet "Product" dans la navbar pour accéder au formulaire
-
-Les règle de gestion suivantes doivent être mise en place
-- La couleur ne peut être que rouge ou bleu. Quel type de donnée mettre en place au niveau du model ? Quel input utiliser au niveau du cshtml ?
-- le nom est obligatoire
-- Le prix doit être strictement supérieur à zéro
-- la description n'est pas obligatoire
-- La couleur est obligatoire
+| Type de retour             | Usage recommandé                                      | Peut retourner autre chose que 200 ? | Commentaires                    |
+|----------------------------|--------------------------------------------------------|----------------------------------------|------------------------------------------|
+| `IActionResult`            | Gestion des erreurs                                    | ✅                                      | Flexibilité maximale                      |
+| `ActionResult<T>`          | Pour retour typé + gestion d'erreurs                   | ✅                                      | Typage fort + contrôle sur les erreurs   |
+| `T` (ex: `UserDto`)        | Retourne toujours un 200                               | ❌                                      | Déconseillé                              |
+| `Task<IActionResult>`      | Idem `IActionResult`, mais version async               | ✅                                      | Pour les appels asynchrones              |
+| `Task<ActionResult<T>>`    | Idem `ActionResult<T>`, version async                  | ✅                                      | Typage + async                            |
 
 
+##==##
+
+# Bruno
+
+Bruno est outil open-source qui permet de tester des API. 
+
+- Ouvrir Bruno
+- Créer un nouvelle collection
+- Créer une nouvelle requête GET vers http://localhost:{port}/weatherforecast/
+- Démarrer votre API
+- Tester 
+
+##==##
+
+# Architecture cible pour notre api
+```
+src/
+│
+├── Controllers/
+│   └── TodoListController.cs       # Contrôleurs API
+│
+├── Services/
+│   │── ITodoListService.cs        # Interface du service
+│   └── TodoListService.cs         # Implémentation du service
+│
+├── Models/
+│   └── Todo.cs               # Modèle de données
+│
+├── DTO/
+│   └── CreateTodoDto.cs            # Objets de transfert de données
+│
+└── Program.cs                   # Point d'entrée
+
+```
+
+##==##
+
+# Création du controller 
+
+- Création du controller TodoListController
+- route api/TodoList
+- Herite de ControllerBase
+- Création d'un route GET toute simple qui retourne juste un code 200
+
+##==##
+
+# Création du controller 
+
+``` cs
+    [ApiController]
+    [Route("api/todolist")]
+    public class TodoListController : ControllerBase
+    {
+        private readonly ILogger<TodoListController> _logger;
+
+        public TodoListController(ILogger<TodoListController> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet]
+        public IActionResult Code200()
+        {
+            return Ok();
+        }
+    }
+```
+
+##==##
+
+# Création du modèle
+<!-- .slide: class="two-column" data-background="#2c3c4e"-->
+
+Créer la class Todo dans un dossier Models :
+
+- Id (Guid)
+- Description (string)
+- IsDone (bool)
+
+##--##
+
+# Création d'un DTO associé pour la création
+
+Créer la class CreateTodoDto dans un dossier DTO :
+
+- Description (string)
+
+##==##
+
+# Création du Service et de son interface
+- Créer la class Service dans le dossier services
+``` cs
+  public class Service : IService
+    {
+        private ICollection<Todo> TodoList = [ 
+                new Todo()
+                {
+                    Id = Guid.NewGuid(),
+                    Description = "Promener le chien"
+                }
+            ];
+
+  ```
+
+- Créer l'interface IService dans le dossier services et ajouter les méthode suivantes
+
+``` cs
+    public interface IService
+    {
+        public ICollection<Todo> GetTodo(); // get todos isDone = false
+        public ICollection<Todo> GetDone(); // get todos isDone = true
+        public Todo Post(CreateTodoDto item); // create todo
+        public Todo ValidateTodo(Guid id); // update Todo => isDone = true
+    }
+```
+Implémenter les méthodes dans le services
+
+##==##
+
+# Injection du service dans le controller
+
+Ajout du service dans program.cs 
+``` cs
+builder.Services.AddSingleton<IService, Service>();
+```
+
+puis injection dans le controller :
+
+``` cs
+        private readonly IService service;
+
+        public TodoListController(IService service)
+        {
+            service = service;
+        }
+```
+
+##==##
+
+# Création des endpoints : GET
+
+Créer deux endpoints Get : 
+- un endpoint pour lister les choses à faire :  api/todolist
+- Un endpoint pour lister les choses faites :  api/todolist/done
+- Renvoie un code 200 + la liste des éléments
+- Si pas d'éléments renvoie un code 204 (no content)
+
+##==##
+
+# Création des endpoints : GET
+
+``` cs
+        [HttpGet] // accessible via  GET api/todolist
+        public IActionResult GetTodo()
+        {
+            var todos = service.GetTodos();
+            if (!todos.Any())
+            {
+                return NoContent();
+            }
+
+            return Ok(todos);
+        }
+
+        [HttpGet("done")] // accessible via  GET api/todolist/done
+        public IActionResult GetDone()
+        {
+            var done = service.GetDone();
+            if (!done.Any())
+            {
+                return NoContent();
+            }
+
+            return Ok(done);
+        }
+```
+##==##
+
+# Création des endpoints : POST
+
+Créer un endpoint POST pour créer un todo
+route : POST api/todolist
+
+##==##
+
+# Création des endpoints : POST
+
+``` cs
+        [HttpPost]
+        public IActionResult Post([FromBody] CreateTodoDto dto)
+        {
+            return Ok(service.Post(dto));
+        }
+```
+
+##==##
+
+# Création des endpoints : PUT
+
+Créer un endpoint pour faire un todo (changement de statut isDone => true)
+route : PUT api/todolist/{id}
+
+##==##
+# Création des endpoints : PUT
+
+``` cs
+        [HttpPut] 
+        public IActionResult Validate([FromRoute] Guid id) // accessible via  PUT api/todolist/{id}
+        {
+            return Ok(service.ValidateTodo(id)); 
+        }
+
+``` 
+##==##
+
+# Création des endpoints : ajout de documentation pour le swagger 
+
+- Ajouter les attributs [ProducesResponseType] (décrit les codes de retour possibles pour Swagger.)
+- Ajouter des commentaires XML (///) 
+
+``` cs
+/// <summary>
+/// Récupère la liste des items à faire.
+/// </summary>
+/// <returns>La liste des todos non terminés ou un code 204 si vide.</returns>
+[HttpGet]
+[ProducesResponseType(StatusCodes.Status200OK)]
+[ProducesResponseType(StatusCodes.Status204NoContent)]
+public IActionResult GetTodo()
+{
+    var todos = service.GetTodos();
+    if (!todos.Any())
+    {
+        return NoContent();
+    }
+
+    return Ok(todos);
+}
+``` 
