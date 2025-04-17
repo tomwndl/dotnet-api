@@ -45,15 +45,15 @@ function apiSlides() {
     '02-api/02-REST.md',
     '02-api/03-bonnes-pratiques.md',
     '02-api/04-api-net.md',
-    '02-api/06-Q&A.md',
+    '02-api/05-consommer-api.md',
   ];
 }
-function modelSlides() {
+function securite() {
   return [
-    '03-Model/00-TITLE.md',
-    '03-Model/01-model-vs-dto.md',
-    '03-Model/02-mapping.md',
-    '03-Model/06-Q&A.md'
+    '03-securite/00-TITLE.md',
+    '03-securitel/01-model-vs-dto.md',
+    '03-securite/02-mapping.md',
+    '03-securite/06-Q&A.md'
   ];
 }
 

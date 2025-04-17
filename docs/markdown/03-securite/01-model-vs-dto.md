@@ -1,20 +1,36 @@
-# Model
+# Objectif
 
-Model : 
-- Représente les entités de la base de données
-- Utilisé pour la logique métier et la gestion des données.
-- Exemples : Product, User, Order.
-
-##==##
-
-# ViewModel 
-- Sert à organiser les données pour l'affichage et la saisie dans une vue.
-- Peux contenir des champs calculés, des validations spécifiques, ou des données provenant de plusieurs modèles.
-- Exemples : ProductViewModel, UserProfileViewModel
+- Rappels sécurité Web
+- Authentification dans ASP.NET Core 
+- Autorisation dans ASP.NET Core
 
 ##==##
 
-# DTO (Data Transfer Object)
+# Rappels sécurité  
+
+Frameworks modernes gèrent déjà beaucoup des risques classiques de sécurité : 
+
+- XSS –  Cross-Site Scripting : L’attaquant injecte du JavaScript malveillant dans une page web (redirection etc)
+- Injection SQL : ORM comme Entity Framework protège par défaut
+
+# Rappels sécurité  
+
+Les bonne pratiques 
+
+- Utiliser HTTPS partout (SSL/TLS)
+- Authentification / authorisation
+- Logguer les erreurs mais ne pas les exposer coté front end => Les messages d’erreur détaillés peuvent révéler la structure du système / fuite d'informations
+- Limiter les surfaces d’attaque => Désactiver les endpoints non utilisés, fermer les ports / services non nécessaires
+- Gérer correctement les dépendances et mises à jour => Beaucoup de failles viennent de librairies vulnérables
+- Logs et surveillance  : Détecter les comportements suspect
+- Limiter les abus (brute force, DDoS, rate limiting) :  Limiter les tentatives de login, utiliser des captcha
+- Principe de moindre privilège :  Séparer les rôles utilisateur (admin, user, invité, etc.), ne pas utiliser un compte admin pour accéder à la base de données
+- Avoir un plan de réaction en cas d'incident : Être prêt à révoquer des tokens, forcer des resets de mot de passe / documenter le processus d’alerte interne
+
+##==##
+
+# Authentification dans avec ASP.NET Core
+
 - Un viewModel est une sorte de DTO
 - Il s'agit d'une classe simple qui contient uniquement des propriétés et aucune logique métier, son but est de transférer des données de manière structurée.
 - Idéal pour des communications entre applications (dans la création/ consommation d'API)
