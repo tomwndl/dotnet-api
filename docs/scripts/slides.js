@@ -9,35 +9,6 @@ function schoolSlides() {
   ];
 }
 
-function history() {
-  return [
-    '10-history/00-TITLE.md',
-    '10-history/01-objectifs.md',
-    '10-history/02-net-framework-history.md',
-    '10-history/03-net-core-history.md',
-    '10-history/04-net-architecture.md',
-    '10-history/05-exercices.md',
-  ];
-}
-
-function csharp() {
-  return [
-    '11-csharp/00-TITLE.md',
-    '11-csharp/01-class-records.md',
-    '11-csharp/02-interfaces.md',
-    '11-csharp/03-string-literals.md',
-    '11-csharp/04-pattern-matching.md',
-    '11-csharp/05-new-features.md',
-  ];
-}
-
-function testSlides() {
-  return [
-    '01-tests/00-TITLE.md',
-    '01-tests/01-Intro-et-rappel.md',
-  ];
-}
-
 function apiSlides() {
   return [
     '02-api/00-TITLE.md',
@@ -51,22 +22,17 @@ function apiSlides() {
 function securite() {
   return [
     '03-securite/00-TITLE.md',
-    '03-securitel/01-model-vs-dto.md',
-    '03-securite/02-mapping.md',
-    '03-securite/06-Q&A.md'
+    '03-securite/01-rappels.md',
+    '03-securite/02-TP.md',
   ];
 }
-
 
 function formation() {
   return [
     //
     ...schoolSlides(), //
     ...apiSlides(),
-    ...history(), //
-    ...csharp(), //
-    ...testSlides(), // //
-    ...modelSlides(), //
+    ...securite(), //
   ].map((slidePath) => {
     return { path: slidePath };
   });
