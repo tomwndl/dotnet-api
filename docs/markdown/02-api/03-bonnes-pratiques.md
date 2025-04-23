@@ -8,6 +8,7 @@
 - Typer les endpoints avec des verbes HTTP (GET, POST, PUT, DELETE) 
 - Ne pas mettre les verbes HTTP dans les routes
 - Suivre les conventions REST https://learn.microsoft.com/fr-fr/azure/architecture/best-practices/api-design
+<!-- .element: class="list-fragment" -->
 
 ``` http
 GET    /api/products          // Récupère tous les produits

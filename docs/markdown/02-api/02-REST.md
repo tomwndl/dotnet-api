@@ -5,6 +5,7 @@
 - Ensemble de principes qui permettent de créer des APIs
 
 ##--##
+# Points clés
 
 - Client-serveur
 - Stateless (Sans état)
@@ -32,12 +33,12 @@ Les verbes HTTP (ou méthodes HTTP) sont des actions standardisées utilisées d
 | DELETE | Supprimer une ressource  | Supprime la ressource spécifiée | Non  |
 
 ##==##
-
 # Les codes de statut HTTP
 
 - code numérique (3 chiffres) 
 - envoyé par le serveur en réponse à une requête HTTP. 
 - Indique le résultat de la requête : succès, redirection, erreur, etc.
+<!-- .element: class="list-fragment" -->
 
 ##==##
 
@@ -71,7 +72,7 @@ Les verbes HTTP (ou méthodes HTTP) sont des actions standardisées utilisées d
 | 400  | Bad Request           | Requête malformée ou invalide                               |
 | 401  | Unauthorized          | Authentification requise mais absente ou invalide           |
 | 403  | Forbidden             | Authentifié mais pas autorisé à accéder à la ressource      |
-| 404  | Not Found             | Ressource inexistante                                       |
+| 404  | Not Found             | Mauvais chemin                                              |
 
 
 ##==##

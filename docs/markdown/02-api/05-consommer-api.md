@@ -76,8 +76,8 @@ public class PostService
 Enregistrer le client dans Program.cs
 
  ``` cs
- // Dans ma classe Service, je veux que tu me donnes un client pré-configuré avec cette base URL.
-builder.Services.AddHttpClient<Service>(client =>
+ // Dans ma classe PostService, je veux que tu me donnes un client pré-configuré avec cette base URL.
+builder.Services.AddHttpClient<PostService>(client =>
 {
      client.BaseAddress = new Uri("https://api.exemple.com/");
 });

@@ -1,6 +1,6 @@
 <!-- .slide: class="transition-bg-sfeir-1" -->
 
-# Api .Net (Crétion d'une api todolist)
+# Api .Net (Création d'une api todolist)
 
 ##==##
 
@@ -20,7 +20,7 @@
 - Un model 
 - Un controller
 - Une classe Program
-- Un fichier .http pour tester les requête dans Visual Studio
+- Un fichier .http pour tester les requêtes dans Visual Studio
 
 ##==##
 
@@ -203,6 +203,49 @@ Créer la class CreateTodoDto dans un dossier DTO :
 Implémenter les méthodes dans le services
 
 ##==##
+``` cs
+    public class Service : IService
+    {
+        private List<Todo> TodoList = [ 
+                new Todo()
+                {
+                    Id = Guid.NewGuid(),
+                    Description = "Promener le chien"
+                }
+            ];
+
+        public ICollection<Todo> GetDone()
+        {
+            return TodoList.Where( t => t.IsDone == true).ToList();
+        }
+
+        public ICollection<Todo> GetTodos()
+        {
+            return TodoList.Where(t => t.IsDone == false).ToList();
+        }
+
+        public Todo Post(CreateTodoDto item)
+        {
+            var newTodo = new Todo() { Id = Guid.NewGuid(), Description = item.Description };
+            TodoList.Add(newTodo);
+            return newTodo;       
+        }
+
+        public Todo ValidateTodo(Guid id)
+        {
+            var todoToValidate = TodoList.FirstOrDefault(t => t.Id == id);
+            if(todoToValidate == null)
+            {
+                throw new Exception($"Pas de todos trouvé avec l'id {id}");
+            }
+
+            todoToValidate.IsDone = true;
+            return todoToValidate;
+        }
+    }
+```
+
+##==##
 
 # Injection du service dans le controller
 
@@ -265,8 +308,9 @@ Créer deux endpoints Get :
 
 # Création des endpoints : POST
 
-Créer un endpoint POST pour créer un todo
-route : POST api/todolist
+Créer un endpoint POST pour créer un todo.
+
+(route : POST api/todolist)
 
 ##==##
 
@@ -276,7 +320,8 @@ route : POST api/todolist
         [HttpPost]
         public IActionResult Post([FromBody] CreateTodoDto dto)
         {
-            return Ok(service.Post(dto));
+            service.Post(dto);
+            return Created();
         }
 ```
 
@@ -284,7 +329,7 @@ route : POST api/todolist
 
 # Création des endpoints : PUT
 
-Créer un endpoint pour faire un todo (changement de statut isDone => true)
+Créer un endpoint pour valider un todo (changement de statut isDone => true)
 route : PUT api/todolist/{id}
 
 ##==##
@@ -303,13 +348,8 @@ route : PUT api/todolist/{id}
 # Création des endpoints : ajout de documentation pour le swagger 
 
 - Ajouter les attributs [ProducesResponseType] (décrit les codes de retour possibles pour Swagger.)
-- Ajouter des commentaires XML (///) 
 
 ``` cs
-/// <summary>
-/// Récupère la liste des items à faire.
-/// </summary>
-/// <returns>La liste des todos non terminés ou un code 204 si vide.</returns>
 [HttpGet]
 [ProducesResponseType(StatusCodes.Status200OK)]
 [ProducesResponseType(StatusCodes.Status204NoContent)]
