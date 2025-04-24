@@ -11,7 +11,6 @@
 - Stateless (Sans état)
 - Cacheabilité
 - Uniformité de l'interface
-- Représentation des ressources
 <!-- .element: class="list-fragment" -->
 
 ##==##

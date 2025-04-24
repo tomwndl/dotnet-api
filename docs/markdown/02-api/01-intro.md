@@ -7,6 +7,8 @@
 - Bonnes pratiques pour les API Web
 - TP : Développement d'une Todo list
 
+https://tomwndl.github.io/dotnet-api/#/
+
 Notes:
 - 
 
@@ -44,6 +46,6 @@ Notes:
 - **Client** : Une application ou un utilisateur envoie une requête à l'API.
 - **Serveur** : L'API traite la requête et retourne une réponse 
 - **Protocole HTTP/HTTPS** 
-- **Format de données** : JSON
+- **Format de données** : JSON / XML
 - **Endpoint** : URL représentant une ressource/action dans l'API (api/users/123 => retourne l'utilisateur avec l'id 123)
 <!-- .element: class="list-fragment" -->
